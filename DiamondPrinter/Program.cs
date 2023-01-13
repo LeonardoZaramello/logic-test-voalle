@@ -7,7 +7,6 @@
         {
             var diamond = new DiamondWriter();
 
-            diamond.GetAlphabetUpperCase();
             diamond.Greeting();
             diamond.ChooseLetter();
 
@@ -17,24 +16,38 @@
 
                 try
                 {
-                    var letter = char.Parse(input.ToUpper());
+                    var letter = char.Parse(input);
 
-                    
-                    if(input.Length == 1 && diamond.alphabet.Contains(letter))
+                    if(char.IsUpper(letter)) diamond.getAlphabetUpperCase();
+                    if(char.IsLower(letter)) diamond.getAlphabetLowerCase();
+
+                    char[] notAllowedChars = {'A', 'B', 'a', 'b'};
+
+                    if(notAllowedChars.Contains(letter))
+                    {   
+                        Console.WriteLine("Letter must be greater or equal *C* to form a Diamond");
+                    }
+                    else if(input.Length == 1 && diamond.alphabet.Contains(letter))
                     {
                         diamond.choosedLetter = letter;
+                        diamond.getDiamondSize();
+                        diamond.DrowDiamond();
+
                         break;
                     }
-                
-                    Console.WriteLine("Only single letters are allowed");
+                    else
+                    {
+                        Console.WriteLine("Only single letters are allowed");
+                    }               
                 }
-                catch (System.Exception)
+                catch (Exception)
                 {
                     Console.WriteLine("Only single letters are allowed");
                 }
             } while (true);
 
-            Console.WriteLine(diamond.choosedLetter);
+
+
         }
     }
 }
