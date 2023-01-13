@@ -30,12 +30,12 @@ public class DiamondWriter
         }
     }
 
-    public void Greeting()
+    public void greeting()
     {
         Console.WriteLine("Welcome to Diamond Writer!!");
     }
 
-    public void ChooseLetter()
+    public void chooseLetter()
     {
         Console.WriteLine("Please choose a *single letter* UPPER or LOWER case to be the edge of the Diamond!");
     }
@@ -46,36 +46,40 @@ public class DiamondWriter
         {
             if(alphabet[i] == choosedLetter) diamondSize = i;
         }
-
-        Console.WriteLine(diamondSize);
     }
 
-    public void DrowDiamond()
+    public void drowDiamond()
     {
         string[] diamond = new string[26];
 
         for (int i = 0; i <= diamondSize; i++)
         {
-            //add initial spaces
+            //Add initial spaces until the letter
             for (int j = 0; j < diamondSize - i; j++)
             {
-                diamond[i] += "*";
+                diamond[i] += " ";
             }
+            // Write the letter
             diamond[i] += alphabet[i];
 
-            //Space between letters
+            //If not first or last row, meaning its not 'A' or 'a', it will add space between the letters
             if (alphabet[i] != 'A' && alphabet[i] != 'a')
             {
                 for (int j = 0; j < (2 * i) - 1; j++)
                 {
-                    diamond[i] += "*";
+                    diamond[i] += " ";
                 }
-                //add letter (second time)
+                //Write the letter (second time)
                 diamond[i] += alphabet[i];
             }
             // Draw the first part of the diamond as it's composing.
             Console.WriteLine(diamond[i]);
         }
 
+        // Reverse Draw Diamond
+        for (int i = diamondSize - 1; i >= 0; i--)
+        {
+            Console.WriteLine(diamond[i]);
+        }
     }
 }

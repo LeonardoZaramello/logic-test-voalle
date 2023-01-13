@@ -7,8 +7,8 @@
         {
             var diamond = new DiamondWriter();
 
-            diamond.Greeting();
-            diamond.ChooseLetter();
+            diamond.greeting();
+            diamond.chooseLetter();
 
             do
             {
@@ -31,7 +31,7 @@
                     {
                         diamond.choosedLetter = letter;
                         diamond.getDiamondSize();
-                        diamond.DrowDiamond();
+                        diamond.drowDiamond();
 
                         break;
                     }
@@ -45,9 +45,6 @@
                     Console.WriteLine("Only single letters are allowed");
                 }
             } while (true);
-
-
-
         }
     }
 }
