@@ -68,7 +68,6 @@
                     if(char.IsUpper(letter)) diamond.getAlphabetUpperCase();
                     if(char.IsLower(letter)) diamond.getAlphabetLowerCase();
 
-
                     if(notAllowedChars.Contains(letter))
                     {   
                         Console.WriteLine("Letter must be after or equal *C* to create  the Form");
