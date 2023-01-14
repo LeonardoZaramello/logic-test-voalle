@@ -3,9 +3,8 @@ namespace DiamondPrinter;
 public class DiamondWriter
 {
     public char[] alphabet = new char[26];
-    public char[][]? diamondTable;
     public char choosedLetter;
-
+    public string? diamondFiller;
     public int diamondSize;
 
     public void getAlphabetUpperCase()
@@ -32,12 +31,18 @@ public class DiamondWriter
 
     public void greeting()
     {
-        Console.WriteLine("Welcome to Diamond Writer!!");
+        Console.WriteLine("Welcome to Diamond Printer!!");
     }
 
     public void chooseLetter()
     {
-        Console.WriteLine("Please choose a *single letter* UPPER or LOWER case to be the edge of the Diamond!");
+        Console.WriteLine("Please choose a single letter to be the edge of the Diamond!");
+        Console.WriteLine("**UPPER or LOWER matters**");
+    }
+
+    public void chooseFiller()
+    {
+        Console.WriteLine("Please choose any character to fill your Diamond, or press enter to keep it void");
     }
 
     public void getDiamondSize()
@@ -65,11 +70,13 @@ public class DiamondWriter
             //If not first or last row, meaning its not 'A' or 'a', it will add space between the letters
             if (alphabet[i] != 'A' && alphabet[i] != 'a')
             {
+                // Gets the number of the row to add as blank spaces
+                // Signed by **j < (2 * i) - 1** in the for loop, as i = row of the diamond.
                 for (int j = 0; j < (2 * i) - 1; j++)
                 {
-                    diamond[i] += " ";
+                    diamond[i] += diamondFiller;
                 }
-                //Write the letter (second time)
+                //Write the letter for the second time
                 diamond[i] += alphabet[i];
             }
             // Draw the first part of the diamond as it's composing.
