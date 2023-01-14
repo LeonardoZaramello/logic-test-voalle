@@ -3,9 +3,10 @@
 
     class Program
     {
-        static void Main(string[] args)
+        static async Task Main(string[] args)
         {
             var diamond = new DiamondWriter();
+
             char[] notAllowedChars = {'A', 'B', 'a', 'b'};
             int[] formInputAllowed = {1,2};
 
@@ -92,6 +93,22 @@
                     Console.WriteLine("Only single letters are allowed");
                 }
             } while (true);
+
+            Console.WriteLine("Write your e-mail if you would like to receive an copy");
+
+            string responseInput = Console.ReadLine() ?? "";
+
+            if(responseInput.Contains('@') && responseInput.Contains(".com"))
+            {
+                Console.WriteLine("Sending e-mail...");
+                diamond.sendEmail(responseInput);
+                Console.WriteLine("E-mail sent!");
+            }
+            else
+            {
+                Console.WriteLine("Exiting...");
+            }
+
         }
     }
 }

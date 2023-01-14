@@ -1,3 +1,6 @@
+using System.Net;
+using System.Net.Mail;
+
 namespace DiamondPrinter;
 
 public class DiamondWriter
@@ -7,6 +10,7 @@ public class DiamondWriter
     public string? letterFiller;
     public int diamondSize;
     public int formNumber;
+    public string emailBody = "";
 
     public void getAlphabetUpperCase()
     {
@@ -95,12 +99,14 @@ public class DiamondWriter
             }
             // Draw the first part of the diamond as it's composing.
             Console.WriteLine(diamond[i]);
+            emailBody += $"{diamond[i]}\n";
         }
 
         // Reverse Draw Diamond
         for (int i = diamondSize - 1; i >= 0; i--)
         {
             Console.WriteLine(diamond[i]);
+            emailBody += $"{diamond[i]}\n";
         }        
     }
 
@@ -113,13 +119,38 @@ public class DiamondWriter
                 if (row == 0 || column == 0 || row == diamondSize || column == diamondSize)
                 {
                     Console.Write($"{alphabet[row]} ");
+                    emailBody += $"{alphabet[row]} ";
                 }
                 else
                 {
                     Console.Write($"{letterFiller} ");
+                    emailBody += $"{letterFiller} ";
                 }
             }
             Console.WriteLine();
+            emailBody += $"\n";
         }
+    }
+
+    public void sendEmail(string responseInput)
+    {
+        string fromMail = "leogfzara@gmail.com";
+        string fromPassword = "mddmqmxintgymvpy";
+
+        var message = new MailMessage();
+        message.From = new MailAddress(fromMail);
+        message.Subject = "Alphabetic Shape";
+        message.To.Add(new MailAddress(responseInput));
+        message.Body = emailBody;
+        message.IsBodyHtml = false;
+
+        var smtpClient = new SmtpClient("smtp.gmail.com")
+        {
+            Port = 587,
+            Credentials = new NetworkCredential(fromMail, fromPassword),
+            EnableSsl = true
+        };
+
+        smtpClient.Send(message);
     }
 }
