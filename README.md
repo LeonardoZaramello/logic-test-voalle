@@ -1,4 +1,4 @@
-# logic-test-voalle
+# Logic test Voalle
 
 ### To run the Console Program
 
