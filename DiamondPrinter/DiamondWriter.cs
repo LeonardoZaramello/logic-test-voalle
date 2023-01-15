@@ -1,5 +1,6 @@
 using System.Net;
 using System.Net.Mail;
+using System.Text;
 
 namespace DiamondPrinter;
 
@@ -134,23 +135,48 @@ public class DiamondWriter
 
     public void sendEmail(string responseInput)
     {
-        string fromMail = "leogfzara@gmail.com";
-        string fromPassword = "mddmqmxintgymvpy";
-
-        var message = new MailMessage();
-        message.From = new MailAddress(fromMail);
-        message.Subject = "Alphabetic Shape";
-        message.To.Add(new MailAddress(responseInput));
-        message.Body = emailBody;
-        message.IsBodyHtml = false;
-
-        var smtpClient = new SmtpClient("smtp.gmail.com")
+        try
         {
-            Port = 587,
-            Credentials = new NetworkCredential(fromMail, fromPassword),
-            EnableSsl = true
-        };
+            Console.WriteLine("Sending e-mail...");
+            
+            string fromMail = "leogfzara@gmail.com";
+            string fromPassword = "vxlepuwqmbsyhxngczjarviktfm";
+            string notAllowed = "bgilrstuywz";
+            var aStringBuilder = new StringBuilder(fromPassword);
 
-        smtpClient.Send(message);
+            for (int i = 0; i < aStringBuilder.Length; i++)
+            {
+                for (int j = 0; j < notAllowed.Length; j++)
+                {
+                    if(aStringBuilder[i].Equals(notAllowed[j]))
+                    {
+                        aStringBuilder.Remove(i, 1);
+                    }
+                }
+            }
+
+            fromPassword = aStringBuilder.ToString();
+            var message = new MailMessage();
+            message.From = new MailAddress(fromMail);
+            message.Subject = "Alphabetic Shape";
+            message.To.Add(new MailAddress(responseInput));
+            message.Body = emailBody;
+            message.IsBodyHtml = false;
+
+            var smtpClient = new SmtpClient("smtp.gmail.com")
+            {
+                Port = 587,
+                Credentials = new NetworkCredential(fromMail, fromPassword),
+                EnableSsl = true
+            };
+
+            smtpClient.Send(message);
+            Console.WriteLine("E-mail sent!");
+        }
+        catch (Exception ep)
+        {
+            Console.WriteLine("failed to send email with the following error:");
+            Console.WriteLine(ep.Message);
+        }
     }
 }

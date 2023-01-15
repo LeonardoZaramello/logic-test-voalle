@@ -100,9 +100,7 @@
 
             if(responseInput.Contains('@') && responseInput.Contains(".com"))
             {
-                Console.WriteLine("Sending e-mail...");
                 diamond.sendEmail(responseInput);
-                Console.WriteLine("E-mail sent!");
             }
             else
             {
